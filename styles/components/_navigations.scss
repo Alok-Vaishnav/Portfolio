@@ -1,0 +1,210 @@
+.navigation-wrapper {
+  // position: fixed;
+  // width: 100%;
+  // height: 100%;
+
+  position: relative;
+  // width: 100vw;
+  z-index: 9999;
+
+  .menu-top {
+    position: fixed;
+    // position: absolute;
+    top: 5rem;
+    right: 0;
+    left: 0;
+    padding: 2rem 4rem;
+    @include centerContent;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    background: rgba(42, 43, 56, 0.5);
+    border: 0.2rem solid #2a2b37;
+    backdrop-filter: blur(104px);
+    border-radius: 2rem;
+
+    @media only screen and (max-width: 40em) {
+      width: 75%;
+      padding: 2rem;
+    }
+
+    .brand-logo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      img {
+        &:nth-child(2) {
+          margin-left: 2rem;
+        }
+      }
+    }
+    .toggle-button-wrapper {
+      @include centerContent;
+      color: var(--color-gray);
+      font-family: $font-tertiary;
+
+      @media only screen and (max-width: 40em) {
+        span {
+          display: none;
+        }
+      }
+
+      .toggle-button {
+        background: transparent;
+        outline: none;
+        border: none;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.brand-logo {
+  // &__icon {
+  // }
+  &__text-wrapper {
+    overflow: hidden;
+    margin-left: 1rem;
+  }
+  &__text {
+    animation: logoLeftAnim 15s cubic-bezier(1, 0, 0, 1) infinite;
+    @media only screen and (max-width: 40em) {
+      // display: none;
+    }
+  }
+}
+
+.menu-wrapper {
+  position: fixed;
+  // position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  height: 100vh;
+  background-color: #050810;
+  color: var(--color-white);
+  overflow-y: scroll;
+}
+
+.navigation-top {
+  margin-top: 25rem;
+  @include centerContent;
+  // padding: 0 40rem;
+  width: 80%;
+  margin-left: auto;
+  text-align: center;
+  margin-right: auto;
+
+  @media only screen and (max-width: 57em) {
+    flex-direction: column;
+    text-align: left;
+    width: fit-content;
+    margin-right: 0rem;
+    margin-left: 6rem;
+    align-items: flex-start;
+  }
+  &__left {
+    text-align: inherit;
+
+    @media only screen and (max-width: 57em) {
+      margin-bottom: 10rem;
+    }
+    &--links {
+      width: 30rem;
+      @include centerContent;
+      margin-top: 4rem;
+      a {
+        color: var(--color-light-blue);
+        text-decoration: none;
+        font-family: $font-tertiary;
+        line-height: 92.4%;
+        letter-spacing: -0.03em;
+        text-transform: uppercase;
+        font-size: 3rem;
+        font-weight: 100;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+          color: var(--color-white);
+        }
+      }
+    }
+  }
+  &__right {
+    text-align: inherit;
+    a {
+      font-size: 5rem;
+      letter-spacing: -0.03em;
+      margin-top: 2rem;
+      display: inline-block;
+      font-family: $font-secondary;
+      text-decoration: none;
+      color: var(--color-white);
+      transition: all 0.3s ease-in-out;
+      &:hover {
+        color: var(--color-light-purple);
+      }
+    }
+  }
+}
+
+.navigation-bottom {
+  margin-top: 15rem;
+  padding: 0 20rem;
+  text-align: center;
+
+  @media only screen and (max-width: 57em) {
+    display: none;
+  }
+
+  &__projects {
+    margin-top: 10rem;
+    @include centerContent;
+    &-card {
+      width: 38.5rem;
+      height: 28.8rem;
+      text-decoration: none;
+      position: relative;
+      font-family: $font-secondary;
+      font-size: 2.2rem;
+      line-height: 130%;
+      letter-spacing: -0.085em;
+      transition: all 0.3s ease-in-out;
+
+      &:not(:last-child) {
+        margin-right: 4rem;
+      }
+
+      &:hover {
+        width: 41.5rem;
+        height: 31.8rem;
+        img {
+          opacity: 0.5;
+        }
+      }
+      img {
+        border-radius: 4.5rem;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        transition: all 0.3s ease-in-out;
+      }
+
+      h2 {
+        text-align: left;
+        color: var(--color-white);
+        position: absolute;
+        top: 40%;
+        left: 10%;
+      }
+    }
+  }
+}
+
+.navigation-h4 {
+  font-family: $font-tertiary;
+  font-size: 1.8rem;
+  line-height: 92.4%;
+  letter-spacing: 0.19em;
+  font-weight: 100;
+}

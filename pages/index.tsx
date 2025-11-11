@@ -1,0 +1,500 @@
+import React, { useState } from "react";
+import Head from "next/head";
+import { cubicBezier, motion } from "framer-motion";
+import { Navigation } from "../components/Navigation/Navigation";
+import useSwr from "swr";
+import ReactGa from "react-ga";
+
+interface indexProps {}
+
+interface Tool {
+  name: string;
+  icon: string;
+}
+
+const locomotiveScroll =
+  typeof window !== `undefined` ? require("locomotive-scroll").default : null;
+
+const hoverEffect =
+  typeof window !== `undefined` ? require("hover-effect").default : null;
+
+const transition: { duration: number; ease: any } = {
+  duration: 1.4,
+  ease: cubicBezier(0.6, 0.01, -0.05, 0.9),
+  // ease: [0.6, 0.01, -0.05, 0.9],
+};
+
+const fetcher = (url: any) => fetch(url).then((res) => res.json());
+
+const index: React.FC<indexProps> = () => {
+  const [isToggleOpen, setIsToggleOpen] = useState<boolean>(false);
+  const { data: reviews, error } = useSwr("/api/tweets", fetcher);
+
+  if (error) console.log(error);
+
+  const refScroll = React.useRef(null);
+  let lscroll: any;
+
+  React.useEffect(() => {
+    ReactGa.initialize("UA-177100391-3");
+    ReactGa.pageview(window.location.pathname + window.location.search);
+
+    if (!refScroll.current) return;
+    // @ts-ignore
+    lscroll = new locomotiveScroll({
+      el: refScroll.current,
+      smooth: true,
+      reloadOnContextChange: true,
+      multiplier: 0.75,
+      inertia: 0.5,
+    });
+
+    // update locomotive scroll
+    window.addEventListener("load", () => {
+      let image = document.querySelector("img");
+      // @ts-ignore
+      const isLoaded = image!.complete && image!.naturalHeight !== 0;
+      lscroll.update();
+    });
+
+    // image hover effect
+    Array.from(document.querySelectorAll(".project-card__middle")).forEach(
+      (el: any) => {
+        const imgs: any = Array.from(el.querySelectorAll("img"));
+        new hoverEffect({
+          parent: el,
+          intensity: 0.2,
+          speedIn: el.dataset.speedin || undefined,
+          speedOut: el.dataset.speedout || undefined,
+          easing: el.dataset.easing || undefined,
+          hover: el.dataset.hover || undefined,
+          image1: imgs[0].getAttribute("src"),
+          image2: imgs[1].getAttribute("src"),
+          displacementImage: el.dataset.displacement,
+        });
+      }
+    );
+
+    // header cursor
+   
+
+    console.clear();
+  }, []);
+
+  function toggleBodyScroll(isToggleOpen: boolean) {
+    if (isToggleOpen === false) {
+      setIsToggleOpen(true);
+    } else if (isToggleOpen === true) {
+      setIsToggleOpen(false);
+    }
+  }
+
+  // list of tools to show in the .tools section
+  const tools: Tool[] = [
+    { name: "Git & GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
+    { name: "HTML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+    { name: "CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
+    { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/npm/simple-icons@vlatest/icons/tailwindcss.svg" },
+    { name: "Bootstrap", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" },
+    { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+    { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+    { name: "C", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" },
+    { name: "C++", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
+    { name: "React.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+    { name: "Vite.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vite/vite-original.svg" },
+    { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
+    { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+    { name: "Express.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
+    { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
+    { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+    { name: "WebSockets", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg" },  
+    { name: "Socket.io", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg" },
+    { name: "GraphQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg" },
+    { name: "REST APIs", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" },
+    { name: "Redis", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" },
+    { name: "Redux", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" },
+    { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
+    { name: "Kubernetes", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" },
+    { name: "Jenkins", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" },
+    { name: "Postman", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" },
+    { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
+    { name: "Vercel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" },
+    { name: "Netlify", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg" },
+    { name: "Canva", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg" },
+  ];
+
+  return (
+    <>
+      <div id="menu-target" data-scroll-container ref={refScroll}>
+        <Head>
+          <link rel="icon" href="svg/favicon.svg" />
+          <link href="https://adeolaadeoti.xyz/" rel="canonical" />
+          <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+          <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+          <link rel="manifest" href="/site.webmanifest"/>
+          <meta name="theme-color" content="#10101A" />
+          <meta
+            name="apple-mobile-web-app-status-bar-style"
+            content="#10101A"
+          />
+          <title>Alok Vaishnav</title>
+          <meta
+            name="description"
+            content="I'm a self-taught Front End Developer and turning ideas into real life products is my calling."
+          />
+          <meta property="og:type" content="website" />
+          <meta
+            property="og:title"
+            content="Alok Vaishnav &mdash; Frontend Developer"
+          />
+          <meta property="og:url" content="https://adeolaadeoti.xyz/" />
+          <meta property="og:image" content="webp/preview-image.png" />
+          <meta
+            property="og:description"
+            content="I'm a self-taught Front End Developer and turning ideas into real life products is my calling."
+          />
+          <meta
+            name="twitter:title"
+            content="Alok Vaishnav &mdash; Frontend Developer"
+          />
+          <meta
+            name="twitter:description"
+            content="I'm a self-taught Front End Developer and turning ideas into real life products is my calling."
+          />
+          <meta name="twitter:image" content="webp/preview-image.png" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:url" content="https://adeolaadeoti.xyz/" />
+        </Head>
+
+        <motion.div
+          data-scroll
+          data-scroll-sticky
+          data-scroll-target="#menu-target"
+          animate={{ top: "-100vh", transition: { ...transition, delay: 6 } }}
+          className="preloader"
+        >
+          <div className="preloader__wrapper">
+            <motion.div
+              initial={{ x: -10, opacity: 0 }}
+              animate={{ x: 0, opacity: 1, transition: { ...transition } }}
+              className="preloader__left"
+            >
+            </motion.div>
+            <motion.div
+              initial={{ x: 10, opacity: 0 }}
+              animate={{ x: 0, opacity: 1, transition: { ...transition } }}
+              className="preloader__right"
+            >
+              <p className="preloader__text">Code</p>
+              <p className="preloader__text">Web</p>
+              <p className="preloader__text">Cloud</p>
+              <p className="preloader__text">Full-Stack</p>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* <div className="cursor">
+
+        </div> */}
+        
+        <Navigation
+          isOpen={isToggleOpen}
+          toggleOpen={() => toggleBodyScroll(isToggleOpen)}
+        />
+        <div className="header-wrapper">
+          <header className="header">
+            <div className="header__hero">
+              <div className="header__hero--heading">
+                <span>Creating web apps</span> <br />
+                <span>and cloud </span>
+                <span className="header__hero--heading-gradient">
+                  solutions{" "}
+                </span>
+                <br />
+                <span>that bring ideas to life.</span>
+              </div>
+              <a
+                className="header__hero--cta"
+                href="https://drive.google.com/file/d/1-Kyl0sg2u7H18g3sRIX3GpK9MAsNyhRy/view?usp=sharing"
+                rel="noopener"
+              >
+                Hire Me
+              </a>
+            </div>
+          </header>
+          <div className="header__footer">
+            <div className="header__footer--left"></div>
+          </div>
+        </div>
+        <main className="container">
+          <p className="about-text">
+            "Hello stranger!"👋 I’m Alok Vaishnav – A Full-Stack Developer and Cloud
+            Enthusiast.
+            <br />I build scalable web applications and smart cloud solutions."
+          </p>
+          <section id="sectionProjects" className="section-projects">
+            <h1 className="heading-1">
+              <span>CodeCrafts</span> <small>💼</small>
+            </h1>
+
+            <div className="project-card">
+              <div className="project-card__left">
+                <h4 className="heading-4">
+                  NEXT JS, LOCOMOTIVE SCROLL, FRAMER MOTION
+                </h4>
+              </div>
+              <div
+                className="project-card__middle"
+                data-displacement="webp/myDistorsionImage.webp"
+              >
+                <img src="webp/alexxandria-1.webp" alt="alexxandria model" />
+                <img src="webp/alexxandria-2.webp" alt="alexxandria logo" />
+              </div>
+              <div className="project-card__right">
+                <h2
+                  data-scroll
+                  data-scroll-offset="35%"
+                  data-scroll-repeat={true}
+                  data-scroll-class="alexxandria-anim"
+                  className="heading-2"
+                >
+                  Alexxandria
+                  <br /> Forque
+                </h2>
+                <a
+                  rel="noopener"
+                  target="_blank"
+                  href="https://alexxandria.vercel.app/"
+                  className="project-card__link"
+                >
+                 Take a Look
+                </a>
+                <div className="project-card__socials">
+                  <a
+                    rel="noopener"
+                    target="_blank"
+                    href="https://github.com/adeolaadeoti/alexxandria"
+                  >
+                    <img src="svg/github.svg" alt="github icon" />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="project-card">
+              <div className="project-card__left">
+                <h4 className="heading-4">REACT JS, FRAMER MOTION</h4>
+              </div>
+              <div
+                className="project-card__middle"
+                data-displacement="webp/myDistorsionImage.webp"
+              >
+                <img src="webp/safarika-1.webp" alt="safarika" />
+                <img src="webp/safarika-2.webp" alt="safarika logo" />
+              </div>
+              <div className="project-card__right">
+                <h2
+                  data-scroll
+                  data-scroll-offset="35%"
+                  data-scroll-repeat={true}
+                  data-scroll-class="safarika-anim"
+                  className="heading-2"
+                >
+                  Safarika
+                </h2>
+                <a
+                  rel="noopener"
+                  target="_blank"
+                  href="https://safarika-adeola.netlify.app/"
+                  className="project-card__link"
+                >
+                  Take a Look
+                </a>
+                <div className="project-card__socials">
+                  <a
+                    rel="noopener"
+                    target="_blank"
+                    href="https://github.com/adeolaadeoti/safarika"
+                  >
+                    <img src="svg/github.svg" alt="github icon" />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="project-card">
+              <div className="project-card__left">
+                <h4 className="heading-4">
+                  NEXT JS, LOCOMOTIVE SCROLL, FRAMER MOTION
+                </h4>
+              </div>
+              <div
+                className="project-card__middle"
+                data-displacement="webp/myDistorsionImage.webp"
+              >
+                <img src="webp/heatrow-1.webp" alt="heatrow" />
+                <img src="webp/heatrow-2.webp" alt="heatrow logo" />
+              </div>
+              <div className="project-card__right">
+                <h2
+                  data-scroll
+                  data-scroll-offset="35%"
+                  data-scroll-repeat={true}
+                  data-scroll-class="heatrow-anim"
+                  className="heading-2"
+                >
+                  Heatrow
+                  <br /> Estate
+                </h2>
+                <a
+                  href="https://heatrow.vercel.app/"
+                  rel="noopener"
+                  target="_blank"
+                  className="project-card__link"
+                >
+                 Take a Look
+                </a>
+                <div className="project-card__socials">
+                  <a
+                    rel="noopener"
+                    target="_blank"
+                    href="https://github.com/adeolaadeoti/heatrow"
+                  >
+                    <img src="svg/github.svg" alt="github icon" />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="project-card">
+              <div className="project-card__left">
+                <h4 className="heading-4">HTML, SCSS, JAVASCRIPT, React</h4>
+              </div>
+              <div
+                className="project-card__middle"
+                data-displacement="webp/myDistorsionImage.webp"
+              >
+                <img src="webp/adeola-1.webp" alt="adeola model" />
+                <img src="webp/adeola-2.webp" alt="adeola logo" />
+              </div>
+              <div className="project-card__right">
+                <h2
+                  data-scroll
+                  data-scroll-offset="35%"
+                  data-scroll-repeat={true}
+                  data-scroll-class="adeola-anim"
+                  className="heading-2"
+                >
+                  Portfolio
+                  
+                </h2>
+                <a
+                  rel="noopener"
+                  target="_blank"
+                  href="https://github.com/adeolaadeoti/adeolaadeoti-portfolio"
+                  className="project-card__link"
+                >
+                  Take a Look
+                </a>
+
+                <div className="project-card__socials">
+                  <a
+                    rel="noopener"
+                    target="_blank"
+                    href="https://github.com/adeolaadeoti/adeolaadeoti-portfolio"
+                  >
+                    <img src="svg/github.svg" alt="github icon" />
+                  </a>
+                </div>
+
+              </div>
+            </div>
+          </section>
+
+
+          <section
+            data-scroll
+            data-scroll-offset="35%"
+            data-scroll-repeat={true}
+            data-scroll-class="section-reviews__bg"
+            className="section-reviews"
+          >
+
+            <div className="section-reviews__top">
+              <h1 className="heading-1">
+                <span>Check out what I bring to the table</span><small>🛠️</small>
+              </h1>
+            </div>
+
+            {/* tools list below the reviews */}
+            <div className="tools">
+              {tools.map((tool) => (
+                <div key={tool.name} className="tools__item">
+                  <img 
+                    className={['Express.js', 'Socket.io', 'Vercel', 'Git & GitHub', 'WebSockets', 'Tailwind CSS'].includes(tool.name) ? 'white-icon' : ''} 
+                    src={tool.icon} 
+                    alt={tool.name}
+                  />
+                  <span className="tools__tooltip">{tool.name}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+
+
+
+          <section className="section-socials">
+            <h1 className="heading-1">
+              <span>Dont be a stranger!</span> <small>👋</small>
+            </h1>
+            <p className="paragraph">Connect with me online</p>
+            <div className="section-socials--links">
+              <a
+                href="https://github.com/Alok-Vaishnav"
+                rel="noopener"
+                target="_blank"
+              >
+                👾 GitHub
+              </a>
+              <a
+                href="https://leetcode.com/u/AlokVaishnav/"
+                rel="noopener"
+                target="_blank"
+              >
+                🐦 Twitter
+              </a>
+              <a
+                href="https://www.linkedin.com/in/alok-vaishnav-63a9a4290"
+                rel="noopener"
+                target="_blank"
+              >
+                💼 LinkedIn
+              </a>
+              <a
+                href="https://www.instagram.com/aalok_vsnv/"
+                rel="noopener"
+                target="_blank"
+              >
+                📸 Instagram
+              </a>
+            </div>
+          </section>
+        </main>
+        <footer className="footer">
+          <div className="footer__socials">
+            <a
+              href="https://github.com/Alok-Vaishnav"
+              target="_blank"
+              rel="noopener"
+            >
+              <img src="svg/github.svg" alt="github logo" />
+            </a>
+          </div>
+        </footer>
+      </div>
+    </>
+  );
+};
+
+export default index;
