@@ -52,6 +52,39 @@ body {
   grid-template-columns: 1fr repeat(12, minmax(min-content, 10rem)) 1fr;
 }
 
+/* Scrollbar styling (vertical and horizontal) */
+html {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(#09c6f9, 0.7) rgba(#ffffff, 0.08);
+}
+
+/* WebKit-based browsers */
+::-webkit-scrollbar {
+  width: 10px; /* vertical */
+  height: 10px; /* horizontal */
+}
+
+::-webkit-scrollbar:vertical {
+  width: 10px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(#ffffff, 0.08);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #045de9 0%, #09c6f9 100%);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #09c6f9 0%, #045de9 100%);
+}
+
 // cursor
 .cursor {
   width: 8rem;
@@ -62,7 +95,6 @@ body {
   pointer-events: none;
   transition: left top 0.1s ease-in-out;
   z-index: 1233333;
-  background-image: url("../public/svg/cursor.svg");
   background-size: contain;
   background-repeat: no-repeat;
   animation: cursorAnim 10s infinite linear;

@@ -76,7 +76,6 @@ const index: React.FC<indexProps> = () => {
     );
 
     // header cursor
-   
 
     console.clear();
   }, []);
@@ -91,36 +90,126 @@ const index: React.FC<indexProps> = () => {
 
   // list of tools to show in the .tools section
   const tools: Tool[] = [
-    { name: "Git & GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
-    { name: "HTML", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
-    { name: "CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
-    { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/npm/simple-icons@vlatest/icons/tailwindcss.svg" },
-    { name: "Bootstrap", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" },
-    { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
-    { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
-    { name: "C", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" },
-    { name: "C++", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
-    { name: "React.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-    { name: "Vite.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vite/vite-original.svg" },
-    { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
-    { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
-    { name: "Express.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
-    { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
-    { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
-    { name: "WebSockets", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg" },  
-    { name: "Socket.io", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg" },
-    { name: "GraphQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg" },
-    { name: "REST APIs", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" },
-    { name: "Redis", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" },
-    { name: "Redux", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" },
-    { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
-    { name: "Kubernetes", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" },
-    { name: "Jenkins", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" },
-    { name: "Postman", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" },
-    { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
-    { name: "Vercel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" },
-    { name: "Netlify", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg" },
-    { name: "Canva", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg" },
+    {
+      name: "Git & GitHub",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+    },
+    {
+      name: "HTML",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+    },
+    {
+      name: "CSS",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+    },
+    {
+      name: "Tailwind CSS",
+      icon: "https://cdn.jsdelivr.net/npm/simple-icons@vlatest/icons/tailwindcss.svg",
+    },
+    {
+      name: "Bootstrap",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
+    },
+    {
+      name: "JavaScript",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+    },
+    {
+      name: "TypeScript",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+    },
+    {
+      name: "C",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg",
+    },
+    {
+      name: "C++",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg",
+    },
+    {
+      name: "React.js",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    },
+    {
+      name: "Vite.js",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vite/vite-original.svg",
+    },
+    {
+      name: "Next.js",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+    },
+    {
+      name: "Node.js",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+    },
+    {
+      name: "Express.js",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
+    },
+    {
+      name: "MongoDB",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+    },
+    {
+      name: "MySQL",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
+    },
+    {
+      name: "WebSockets",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg",
+    },
+    {
+      name: "Socket.io",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg",
+    },
+    {
+      name: "GraphQL",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg",
+    },
+    {
+      name: "REST APIs",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg",
+    },
+    {
+      name: "Redis",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg",
+    },
+    {
+      name: "Redux",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg",
+    },
+    {
+      name: "Docker",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+    },
+    {
+      name: "Kubernetes",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg",
+    },
+    {
+      name: "Jenkins",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg",
+    },
+    {
+      name: "Postman",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg",
+    },
+    {
+      name: "Figma",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
+    },
+    {
+      name: "Vercel",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg",
+    },
+    {
+      name: "Netlify",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg",
+    },
+    {
+      name: "Canva",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg",
+    },
   ];
 
   return (
@@ -129,10 +218,24 @@ const index: React.FC<indexProps> = () => {
         <Head>
           <link rel="icon" href="svg/favicon.svg" />
           <link href="https://adeolaadeoti.xyz/" rel="canonical" />
-          <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
-          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
-          <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
-          <link rel="manifest" href="/site.webmanifest"/>
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+          />
+          <link rel="manifest" href="/site.webmanifest" />
           <meta name="theme-color" content="#10101A" />
           <meta
             name="apple-mobile-web-app-status-bar-style"
@@ -179,8 +282,7 @@ const index: React.FC<indexProps> = () => {
               initial={{ x: -10, opacity: 0 }}
               animate={{ x: 0, opacity: 1, transition: { ...transition } }}
               className="preloader__left"
-            >
-            </motion.div>
+            ></motion.div>
             <motion.div
               initial={{ x: 10, opacity: 0 }}
               animate={{ x: 0, opacity: 1, transition: { ...transition } }}
@@ -197,7 +299,7 @@ const index: React.FC<indexProps> = () => {
         {/* <div className="cursor">
 
         </div> */}
-        
+
         <Navigation
           isOpen={isToggleOpen}
           toggleOpen={() => toggleBodyScroll(isToggleOpen)}
@@ -218,6 +320,7 @@ const index: React.FC<indexProps> = () => {
                 className="header__hero--cta"
                 href="https://drive.google.com/file/d/1-Kyl0sg2u7H18g3sRIX3GpK9MAsNyhRy/view?usp=sharing"
                 rel="noopener"
+                target="_blank"
               >
                 Hire Me
               </a>
@@ -227,54 +330,57 @@ const index: React.FC<indexProps> = () => {
             <div className="header__footer--left"></div>
           </div>
         </div>
+
         <main className="container">
+
+          {/* About-me */}
+          
           <p className="about-text">
-            "Hello stranger!"👋 I’m Alok Vaishnav – A Full-Stack Developer and Cloud
-            Enthusiast.
-            <br />I build scalable web applications and smart cloud solutions."
+            “Hello stranger!” 👋 I’m Alok Vaishnav — a Full-Stack Developer and Cloud Enthusiast.
+            <br />I focus on creating reliable, scalable web applications and cloud-based solutions, with an emphasis on
+
+            <br />clean code, performance, and real-world usability.
           </p>
+
+          {/* projects */}
           <section id="sectionProjects" className="section-projects">
             <h1 className="heading-1">
               <span>CodeCrafts</span> <small>💼</small>
             </h1>
 
+            {/* 01 */}
             <div className="project-card">
               <div className="project-card__left">
                 <h4 className="heading-4">
-                  NEXT JS, LOCOMOTIVE SCROLL, FRAMER MOTION
+                  Vite JS, Java-Script, Socket.io, Express JS, Node JS
                 </h4>
               </div>
               <div
                 className="project-card__middle"
                 data-displacement="webp/myDistorsionImage.webp"
               >
-                <img src="webp/alexxandria-1.webp" alt="alexxandria model" />
-                <img src="webp/alexxandria-2.webp" alt="alexxandria logo" />
+                <img src="webp\Chatify-1.png" alt="chatify model" />
+                <img src="webp\Chatify-2.png" alt="chatify logo" />
               </div>
               <div className="project-card__right">
-                <h2
-                  data-scroll
-                  data-scroll-offset="35%"
-                  data-scroll-repeat={true}
-                  data-scroll-class="alexxandria-anim"
-                  className="heading-2"
-                >
-                  Alexxandria
-                  <br /> Forque
+                <h2 className="heading-2">
+                  Chatify
+                  <br /> ChatApp
                 </h2>
                 <a
                   rel="noopener"
                   target="_blank"
-                  href="https://alexxandria.vercel.app/"
+                  href="https://chatify-orpin.vercel.app"
                   className="project-card__link"
                 >
-                 Take a Look
+                  Take a Look
                 </a>
+
                 <div className="project-card__socials">
                   <a
                     rel="noopener"
                     target="_blank"
-                    href="https://github.com/adeolaadeoti/alexxandria"
+                    href="https://github.com/Alok-Vaishnav/Chatify"
                   >
                     <img src="svg/github.svg" alt="github icon" />
                   </a>
@@ -282,6 +388,7 @@ const index: React.FC<indexProps> = () => {
               </div>
             </div>
 
+            {/* 02 */}
             <div className="project-card">
               <div className="project-card__left">
                 <h4 className="heading-4">REACT JS, FRAMER MOTION</h4>
@@ -323,18 +430,20 @@ const index: React.FC<indexProps> = () => {
               </div>
             </div>
 
+            {/* 03 */}
+
             <div className="project-card">
               <div className="project-card__left">
                 <h4 className="heading-4">
-                  NEXT JS, LOCOMOTIVE SCROLL, FRAMER MOTION
+                  ReactJs, MongoDb, JSON Token,NodeJs
                 </h4>
               </div>
               <div
                 className="project-card__middle"
                 data-displacement="webp/myDistorsionImage.webp"
               >
-                <img src="webp/heatrow-1.webp" alt="heatrow" />
-                <img src="webp/heatrow-2.webp" alt="heatrow logo" />
+                <img src="webp/Paper-Trail-1.png" alt="paper-trail" />
+                <img src="webp/Paper-Trail-2.png" alt="paper-trail logo" />
               </div>
               <div className="project-card__right">
                 <h2
@@ -344,22 +453,22 @@ const index: React.FC<indexProps> = () => {
                   data-scroll-class="heatrow-anim"
                   className="heading-2"
                 >
-                  Heatrow
-                  <br /> Estate
+                  Paper-Trail
+                  <br /> Notes App
                 </h2>
                 <a
-                  href="https://heatrow.vercel.app/"
+                  href="https://paper-trail-zeta.vercel.app/"
                   rel="noopener"
                   target="_blank"
                   className="project-card__link"
                 >
-                 Take a Look
+                  Take a Look
                 </a>
                 <div className="project-card__socials">
                   <a
                     rel="noopener"
                     target="_blank"
-                    href="https://github.com/adeolaadeoti/heatrow"
+                    href="https://github.com/Alok-Vaishnav/Paper-Trail"
                   >
                     <img src="svg/github.svg" alt="github icon" />
                   </a>
@@ -367,16 +476,20 @@ const index: React.FC<indexProps> = () => {
               </div>
             </div>
 
+            {/* 04 */}
+
             <div className="project-card">
               <div className="project-card__left">
-                <h4 className="heading-4">HTML, SCSS, JAVASCRIPT, React</h4>
+                <h4 className="heading-4">
+                  ReactJs, ExpressJs, TailwindCss, Mongoose{" "}
+                </h4>
               </div>
               <div
                 className="project-card__middle"
                 data-displacement="webp/myDistorsionImage.webp"
               >
-                <img src="webp/adeola-1.webp" alt="adeola model" />
-                <img src="webp/adeola-2.webp" alt="adeola logo" />
+                <img src="webp/Shoping-Mart-01 .png" alt="shoping mart" />
+                <img src="webp/Shoping-Mart-02 .png" alt="shoping mart" />
               </div>
               <div className="project-card__right">
                 <h2
@@ -386,13 +499,14 @@ const index: React.FC<indexProps> = () => {
                   data-scroll-class="adeola-anim"
                   className="heading-2"
                 >
-                  Portfolio
-                  
+                  Shoping-Mart
+                  <br /> E-Commerce App
                 </h2>
+
                 <a
                   rel="noopener"
                   target="_blank"
-                  href="https://github.com/adeolaadeoti/adeolaadeoti-portfolio"
+                  href="https://shoping-mart-sepia.vercel.app/"
                   className="project-card__link"
                 >
                   Take a Look
@@ -402,16 +516,40 @@ const index: React.FC<indexProps> = () => {
                   <a
                     rel="noopener"
                     target="_blank"
-                    href="https://github.com/adeolaadeoti/adeolaadeoti-portfolio"
+                    href="https://github.com/Alok-Vaishnav/Shoping-Mart"
                   >
                     <img src="svg/github.svg" alt="github icon" />
                   </a>
                 </div>
-
               </div>
             </div>
           </section>
 
+          {/* skills */}
+          <section
+            data-scroll
+            data-scroll-offset="35%"
+            data-scroll-repeat={true}
+            data-scroll-class="section-reviews__bg"
+            className="section-reviews"
+          >
+            <div className="section-reviews__top">
+              <h1 className="heading-1">
+                <span>Check out what I bring to the table</span>
+                <small>🛠️</small>
+              </h1>
+            </div>
+
+            {/* tools list below the reviews */}
+            <div className="tools">
+              {tools.map((tool) => (
+                <div key={tool.name} className="tools__item">
+                  <img src={tool.icon} alt={tool.name} />
+                  <span className="tools__tooltip">{tool.name}</span>
+                </div>
+              ))}
+            </div>
+          </section>
 
           <section
             data-scroll
@@ -420,29 +558,188 @@ const index: React.FC<indexProps> = () => {
             data-scroll-class="section-reviews__bg"
             className="section-reviews"
           >
-
             <div className="section-reviews__top">
               <h1 className="heading-1">
-                <span>Check out what I bring to the table</span><small>🛠️</small>
+                <span> Where it all started</span>
+                <small>🎓</small>
               </h1>
-            </div>
 
-            {/* tools list below the reviews */}
-            <div className="tools">
-              {tools.map((tool) => (
-                <div key={tool.name} className="tools__item">
-                  <img 
-                    className={['Express.js', 'Socket.io', 'Vercel', 'Git & GitHub', 'WebSockets', 'Tailwind CSS'].includes(tool.name) ? 'white-icon' : ''} 
-                    src={tool.icon} 
-                    alt={tool.name}
-                  />
-                  <span className="tools__tooltip">{tool.name}</span>
+              <div
+                className="education"
+                style={{
+                  display: "flex",
+                  gap: "3rem",
+                  flexWrap: "wrap",
+                  marginTop: "4rem",
+                }}
+              >
+                <div
+                  className="education__item"
+                  style={{
+                    flex: "1 1 calc(50% - 1.5rem)",
+                    background:
+                      "linear-gradient(135deg, rgba(4, 93, 233, 0.08) 0%, rgba(9, 198, 249, 0.12) 100%)",
+                    border: "1px solid rgba(9, 198, 249, 0.2)",
+                    borderRadius: "16px",
+                    padding: "3rem 2.5rem",
+                    minWidth: "320px",
+                    position: "relative",
+                    overflow: "hidden",
+                    transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "translateY(-8px)";
+                    e.currentTarget.style.boxShadow =
+                      "0 12px 40px rgba(9, 198, 249, 0.2)";
+                    e.currentTarget.style.borderColor =
+                      "rgba(9, 198, 249, 0.4)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow =
+                      "0 4px 20px rgba(0, 0, 0, 0.1)";
+                    e.currentTarget.style.borderColor =
+                      "rgba(9, 198, 249, 0.2)";
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: "3rem",
+                      marginBottom: "1rem",
+                      background:
+                        "linear-gradient(135deg, #045de9 0%, #09c6f9 100%)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                    }}
+                  >
+                    📚
+                  </div>
+                  <h4
+                    className="heading-4"
+                    style={{ marginBottom: "0.8rem", fontSize: "1.8rem" }}
+                  >
+                    Bachelor of Computer Applications
+                  </h4>
+
+                  <p
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "rgba(255, 255, 255, 0.6)",
+                      fontWeight: "300",
+                      letterSpacing: "0.5px",
+                    }}
+                  >
+                   Computer Applications
+                  </p>
+
+                  <p
+                    className="paragraph"
+                    style={{
+                      marginTop: "1.5rem",
+                      color: "rgba(255, 255, 255, 0.8)",
+                    }}
+                  >
+                    Kuchaman College • Years 2021-2024
+                  </p>
+
+                  <p
+                    style={{
+                      fontSize: "1rem",
+                      color: "rgba(255, 255, 255, 0.6)",
+                      fontWeight: "300",
+                      letterSpacing: "0.5px",
+                    }}
+                  >
+                    Kuchaman City
+                  </p>
+
                 </div>
-              ))}
+
+                <div
+                  className="education__item"
+                  style={{
+                    flex: "1 1 calc(50% - 1.5rem)",
+                    background:
+                      "linear-gradient(135deg, rgba(109, 160, 161, 0.08) 0%, rgba(33, 54, 56, 0.12) 100%)",
+                    border: "1px solid rgba(109, 160, 161, 0.2)",
+                    borderRadius: "16px",
+                    padding: "3rem 2.5rem",
+                    minWidth: "320px",
+                    position: "relative",
+                    overflow: "hidden",
+                    transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "translateY(-8px)";
+                    e.currentTarget.style.boxShadow =
+                      "0 12px 40px rgba(109, 160, 161, 0.2)";
+                    e.currentTarget.style.borderColor =
+                      "rgba(109, 160, 161, 0.4)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow =
+                      "0 4px 20px rgba(0, 0, 0, 0.1)";
+                    e.currentTarget.style.borderColor =
+                      "rgba(109, 160, 161, 0.2)";
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: "3rem",
+                      marginBottom: "1rem",
+                      background:
+                        "linear-gradient(135deg, #6da0a1 0%, #213638 100%)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                    }}
+                  >
+                    🎓
+                  </div>
+                  <h4
+                    className="heading-4"
+                    style={{ marginBottom: "0.8rem", fontSize: "1.8rem" }}
+                  >
+                    Master of Computer Applications
+                  </h4>
+
+                  <p
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "rgba(255, 255, 255, 0.6)",
+                      fontWeight: "300",
+                      letterSpacing: "0.5px",
+                    }}
+                  >
+                   Cloud Computing & Full-Stack Development
+                  </p>
+
+                  <p
+                    className="paragraph"
+                    style={{
+                      marginTop: "1.5rem",
+                      color: "rgba(255, 255, 255, 0.8)",
+                    }}
+                  >
+                    JECRC University • Years 2024-2026
+                  </p>
+
+                  <p
+                    style={{
+                      fontSize: "1rem",
+                      color: "rgba(255, 255, 255, 0.6)",
+                      fontWeight: "300",
+                      letterSpacing: "0.5px",
+                    }}
+                  >
+                    Jaipur
+                  </p>
+                </div>
+              </div>
             </div>
           </section>
-
-
 
           <section className="section-socials">
             <h1 className="heading-1">
@@ -455,7 +752,7 @@ const index: React.FC<indexProps> = () => {
                 rel="noopener"
                 target="_blank"
               >
-                👾 GitHub
+                👾 GitHub 🛠️
               </a>
               <a
                 href="https://leetcode.com/u/AlokVaishnav/"

@@ -61,7 +61,7 @@
   }
 
   &-2 {
-    font-size: 4.2rem;
+    font-size: clamp(2rem, 3.8vw, 4.2rem);
     line-height: 105%;
     letter-spacing: -0.03em;
     color: var(--color-white);
@@ -105,8 +105,8 @@
 .alexxandria-anim {
   background: linear-gradient(
     -45deg,
-    #63898a,
-    #9fbcbf,
+    #6da0a1,
+    #213638,
     var(--color-white),
     var(--color-white)
   );
@@ -175,15 +175,18 @@
 
 .about-text {
   grid-column: 2/14;
-  font-size: 1.7rem;
+  font-size: 2.2rem;
   line-height: 130.4%;
   color: var(--color-gray);
   display: block;
   padding: 0 6rem;
+  margin-top: -8rem;
+  margin-bottom: 6rem;
 
   @media only screen and (max-width: 75em) {
     grid-column: 1/15;
     padding: 0 5rem;
+    font-size: 2rem;
   }
 
   @media only screen and (max-width: 62.5em) {
@@ -192,6 +195,9 @@
 
   @media only screen and (max-width: 56.25em) {
     padding: 0 3rem;
+    margin-top: -4rem;
+    margin-bottom: 4rem;
+    font-size: 1.7rem;
     br {
       display: none;
     }
