@@ -84,11 +84,8 @@ const Index: React.FC<indexProps> = () => {
     // header cursor
     const cursorEl = cursorRef.current;
     const isTouch = window.matchMedia("(pointer: coarse)").matches;
-    const isHoverCapable = window.matchMedia("(hover: hover)").matches;
-    
-    
-    
-    if (!cursorEl || isTouch || !isHoverCapable) return;
+
+    if (!cursorEl || isTouch) return;
 
     const move = (e: MouseEvent) => {
       cursorEl.style.setProperty("--x", `${e.clientX}px`);
@@ -105,9 +102,9 @@ const Index: React.FC<indexProps> = () => {
       cursorEl.style.setProperty("opacity", "0");
     };
 
-    window.addEventListener("mousemove", move);
-    window.addEventListener("mouseenter", show);
-    window.addEventListener("mouseleave", hide);
+    window.addEventListener("mousemove", move, { passive: true });
+    window.addEventListener("mouseenter", show, { passive: true });
+    window.addEventListener("mouseleave", hide, { passive: true });
 
     // Set initial position to center and show immediately for browsers that delay mouseenter
     cursorEl.style.setProperty("--x", `${window.innerWidth / 2}px`);

@@ -107,7 +107,7 @@ export const MobileNavigation = ({ variants, isOpen }: any) => (
             href="https://alexxandria.vercel.app/"
             className="navigation-bottom__projects-card"
           >
-            <img src="webp/alexxandria-nav.webp" alt="alexxandria" />
+            <img src="webp/safarika-nav.webp" alt="alexxandria" />
             <h2>
               Alexxandria
               <br />
@@ -129,7 +129,7 @@ export const MobileNavigation = ({ variants, isOpen }: any) => (
             rel="noopener"
             className="navigation-bottom__projects-card"
           >
-            <img src="webp/adeola-1.webp" alt="adeola" />
+            <img src="webp/Profile.png" alt="adeola" />
             <h2>
               AdeolaAdeoti
               <br />
