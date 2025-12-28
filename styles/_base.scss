@@ -52,6 +52,97 @@ body {
   grid-template-columns: 1fr repeat(12, minmax(min-content, 10rem)) 1fr;
 }
 
+/* Custom cursor (desktop only) */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle at 30% 30%, #d4b5ff, #8f6fff);
+  box-shadow: 
+    inset -1px -1px 3px rgba(0, 0, 0, 0.3),
+    inset 1px 1px 3px rgba(255, 255, 255, 0.2),
+    0 0 14px rgba(184, 150, 255, 0.4),
+    0 0 28px rgba(143, 111, 255, 0.2);
+  border: 2px solid rgba(212, 181, 255, 0.7);
+  transform: translate3d(var(--x, -999px), var(--y, -999px), 0) translate(-50%, -50%);
+  transition: transform 45ms linear, opacity 150ms ease;
+  z-index: 99999;
+  will-change: transform;
+  box-sizing: border-box;
+  animation: cursorGlowPulse 1.2s ease-in-out infinite;
+  opacity: 1;
+  display: block;
+}
+
+@keyframes cursorGlowPulse {
+  0%, 100% {
+    box-shadow: 
+      inset -1px -1px 3px rgba(0, 0, 0, 0.3),
+      inset 1px 1px 3px rgba(255, 255, 255, 0.2),
+      0 0 10px rgba(184, 150, 255, 0.3),
+      0 0 20px rgba(143, 111, 255, 0.15);
+  }
+  50% {
+    box-shadow: 
+      inset -1px -1px 3px rgba(0, 0, 0, 0.3),
+      inset 1px 1px 3px rgba(255, 255, 255, 0.2),
+      0 0 20px rgba(184, 150, 255, 0.6),
+      0 0 40px rgba(143, 111, 255, 0.35);
+  }
+}
+
+.custom-cursor::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px dashed rgba(212, 181, 255, 0.4);
+  pointer-events: none;
+  animation: cursorRing 4s linear infinite;
+}
+
+@keyframes cursorRing {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.custom-cursor--hidden {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+@media (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+    opacity: 0 !important;
+  }
+}
+
+@supports selector(::-webkit-scrollbar) or selector(::-moz-selection) {
+  @media (pointer: fine) {
+    body,
+    body * {
+      cursor: none;
+    }
+  }
+}
+
+/* Opera and other browsers */
+@media (hover: hover) {
+  body,
+  body * {
+    cursor: none;
+  }
+}
+
 /* Scrollbar styling (vertical and horizontal) */
 html {
   scrollbar-width: thin; /* Firefox */

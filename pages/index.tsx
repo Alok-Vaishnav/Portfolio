@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Head from "next/head";
 import { cubicBezier, motion } from "framer-motion";
 import { Navigation } from "../components/Navigation/Navigation";
-import useSwr from "swr";
 import ReactGa from "react-ga";
 
 interface indexProps {}
@@ -12,11 +11,7 @@ interface Tool {
   icon: string;
 }
 
-const locomotiveScroll =
-  typeof window !== `undefined` ? require("locomotive-scroll").default : null;
-
-const hoverEffect =
-  typeof window !== `undefined` ? require("hover-effect").default : null;
+// Move third-party libs to dynamic imports inside useEffect to avoid module-level side effects
 
 const transition: { duration: number; ease: any } = {
   duration: 1.4,
@@ -24,44 +19,51 @@ const transition: { duration: number; ease: any } = {
   // ease: [0.6, 0.01, -0.05, 0.9],
 };
 
-const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
-const index: React.FC<indexProps> = () => {
+const Index: React.FC<indexProps> = () => {
   const [isToggleOpen, setIsToggleOpen] = useState<boolean>(false);
-  const { data: reviews, error } = useSwr("/api/tweets", fetcher);
+  
+  const cursorRef = React.useRef<HTMLDivElement>(null);
+  const lscrollRef = React.useRef<any>(null);
 
-  if (error) console.log(error);
+  
 
   const refScroll = React.useRef(null);
-  let lscroll: any;
+  // store LocomotiveScroll instance in a ref to survive Fast Refresh
 
   React.useEffect(() => {
     ReactGa.initialize("UA-177100391-3");
     ReactGa.pageview(window.location.pathname + window.location.search);
 
     if (!refScroll.current) return;
-    // @ts-ignore
-    lscroll = new locomotiveScroll({
-      el: refScroll.current,
-      smooth: true,
-      reloadOnContextChange: true,
-      multiplier: 0.75,
-      inertia: 0.5,
-    });
 
-    // update locomotive scroll
-    window.addEventListener("load", () => {
-      let image = document.querySelector("img");
+    const setupScrollAndEffects = async () => {
+      const [{ default: LocomotiveScroll }, { default: HoverEffect }] = await Promise.all([
+        import("locomotive-scroll"),
+        import("hover-effect")
+      ]);
+
+      // init locomotive scroll
       // @ts-ignore
-      const isLoaded = image!.complete && image!.naturalHeight !== 0;
-      lscroll.update();
-    });
+      lscrollRef.current = new LocomotiveScroll({
+        el: refScroll.current,
+        smooth: true,
+        reloadOnContextChange: true,
+        multiplier: 0.75,
+        inertia: 0.5,
+      });
 
-    // image hover effect
-    Array.from(document.querySelectorAll(".project-card__middle")).forEach(
-      (el: any) => {
+      // update locomotive scroll on load
+      window.addEventListener("load", () => {
+        if (lscrollRef.current) {
+          lscrollRef.current.update();
+        }
+      });
+
+      // image hover effect
+      Array.from(document.querySelectorAll(".project-card__middle")).forEach((el: any) => {
         const imgs: any = Array.from(el.querySelectorAll("img"));
-        new hoverEffect({
+        new HoverEffect({
           parent: el,
           intensity: 0.2,
           speedIn: el.dataset.speedin || undefined,
@@ -72,12 +74,57 @@ const index: React.FC<indexProps> = () => {
           image2: imgs[1].getAttribute("src"),
           displacementImage: el.dataset.displacement,
         });
-      }
-    );
+      });
+    };
+
+    setupScrollAndEffects();
+
+    // moved hover effects and scroll init into dynamic import block above
 
     // header cursor
+    const cursorEl = cursorRef.current;
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    const isHoverCapable = window.matchMedia("(hover: hover)").matches;
+    
+    
+    
+    if (!cursorEl || isTouch || !isHoverCapable) return;
 
-    console.clear();
+    const move = (e: MouseEvent) => {
+      cursorEl.style.setProperty("--x", `${e.clientX}px`);
+      cursorEl.style.setProperty("--y", `${e.clientY}px`);
+    };
+
+    const show = () => {
+      cursorEl.classList.remove("custom-cursor--hidden");
+      cursorEl.style.setProperty("opacity", "1");
+      
+    };
+    const hide = () => {
+      cursorEl.classList.add("custom-cursor--hidden");
+      cursorEl.style.setProperty("opacity", "0");
+    };
+
+    window.addEventListener("mousemove", move);
+    window.addEventListener("mouseenter", show);
+    window.addEventListener("mouseleave", hide);
+
+    // Set initial position to center and show immediately for browsers that delay mouseenter
+    cursorEl.style.setProperty("--x", `${window.innerWidth / 2}px`);
+    cursorEl.style.setProperty("--y", `${window.innerHeight / 2}px`);
+    show();
+
+    
+
+    return () => {
+      window.removeEventListener("mousemove", move);
+      window.removeEventListener("mouseenter", show);
+      window.removeEventListener("mouseleave", hide);
+      if (lscrollRef.current && typeof lscrollRef.current.destroy === "function") {
+        lscrollRef.current.destroy();
+        lscrollRef.current = null;
+      }
+    };
   }, []);
 
   function toggleBodyScroll(isToggleOpen: boolean) {
@@ -159,10 +206,6 @@ const index: React.FC<indexProps> = () => {
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg",
     },
     {
-      name: "Socket.io",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg",
-    },
-    {
       name: "GraphQL",
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg",
     },
@@ -214,34 +257,40 @@ const index: React.FC<indexProps> = () => {
 
   return (
     <>
+      <div ref={cursorRef} className="custom-cursor custom-cursor--hidden" />
       <div id="menu-target" data-scroll-container ref={refScroll}>
         <Head>
-          <link rel="icon" href="svg/favicon.svg" />
-          <link href="https://adeolaadeoti.xyz/" rel="canonical" />
+          <link rel="icon" href="/Fav/favicon.ico" />
+          <link href="https://aalok.codes" rel="canonical" />
+
           <link
             rel="apple-touch-icon"
             sizes="180x180"
-            href="/apple-touch-icon.png"
+            href="/Fav/apple-touch-icon.png"
           />
+
           <link
             rel="icon"
             type="image/png"
             sizes="32x32"
-            href="/favicon-32x32.png"
+            href="/Fav/favicon-32x32.png"
           />
           <link
             rel="icon"
             type="image/png"
             sizes="16x16"
-            href="/favicon-16x16.png"
+            href="/Fav/favicon-16x16.png"
+
+            
           />
-          <link rel="manifest" href="/site.webmanifest" />
+
+        
           <meta name="theme-color" content="#10101A" />
           <meta
             name="apple-mobile-web-app-status-bar-style"
             content="#10101A"
           />
-          <title>Alok Vaishnav</title>
+          <title>Aalok👲</title>
           <meta
             name="description"
             content="I'm a self-taught Front End Developer and turning ideas into real life products is my calling."
@@ -251,23 +300,23 @@ const index: React.FC<indexProps> = () => {
             property="og:title"
             content="Alok Vaishnav &mdash; Frontend Developer"
           />
-          <meta property="og:url" content="https://adeolaadeoti.xyz/" />
+          <meta property="og:url" content="https://aalok.codes" />
           <meta property="og:image" content="webp/preview-image.png" />
           <meta
             property="og:description"
-            content="I'm a self-taught Front End Developer and turning ideas into real life products is my calling."
+           content="I'm a Full Stack Developer and turning ideas into real life products is my calling."
           />
           <meta
             name="twitter:title"
-            content="Alok Vaishnav &mdash; Frontend Developer"
+            content="Alok Vaishnav &mdash; Full Stack Developer"
           />
           <meta
             name="twitter:description"
-            content="I'm a self-taught Front End Developer and turning ideas into real life products is my calling."
+            content="I'm a Full Stack Developer and turning ideas into real life products is my calling."
           />
           <meta name="twitter:image" content="webp/preview-image.png" />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:url" content="https://adeolaadeoti.xyz/" />
+          <meta name="twitter:url" content="https://aalok.codes" />
         </Head>
 
         <motion.div
@@ -307,24 +356,38 @@ const index: React.FC<indexProps> = () => {
         <div className="header-wrapper">
           <header className="header">
             <div className="header__hero">
-              <div className="header__hero--heading">
-                <span>Creating web apps</span> <br />
-                <span>and cloud </span>
-                <span className="header__hero--heading-gradient">
-                  solutions{" "}
-                </span>
-                <br />
-                <span>that bring ideas to life.</span>
+              <div className="header__hero__content">
+                <div className="header__hero--heading">
+                  <div>turning ideas into</div>
+                  <div>real life <span className="header__hero--heading-gradient">products</span></div>
+                  <div>is my calling.</div>
+                </div>
+
+                <a
+                  className="header__hero--cta"
+                  href="https://drive.google.com/file/d/1-Kyl0sg2u7H18g3sRIX3GpK9MAsNyhRy/view?usp=sharing"
+                  rel="noopener"
+                  target="_blank"
+                >
+                 The Paperwork
+                </a>
+
               </div>
-              <a
-                className="header__hero--cta"
-                href="https://drive.google.com/file/d/1-Kyl0sg2u7H18g3sRIX3GpK9MAsNyhRy/view?usp=sharing"
-                rel="noopener"
-                target="_blank"
-              >
-                Hire Me
-              </a>
+
+              <div className="header__hero__photo">
+
+                <img
+                  src="webp/Profile.png"
+                  alt="Alok Vaishnav portrait"
+                  loading="lazy"
+                  className="profile-image"
+                />
+
+              </div>
+              
             </div>
+
+
           </header>
           <div className="header__footer">
             <div className="header__footer--left"></div>
@@ -355,18 +418,32 @@ const index: React.FC<indexProps> = () => {
                   Vite JS, Java-Script, Socket.io, Express JS, Node JS
                 </h4>
               </div>
+
               <div
                 className="project-card__middle"
                 data-displacement="webp/myDistorsionImage.webp"
               >
-                <img src="webp\Chatify-1.png" alt="chatify model" />
-                <img src="webp\Chatify-2.png" alt="chatify logo" />
+                <img src="/webp/Chatify-1.png" alt="chatify model" />
+                <img src="/webp/Chatify-2.png" alt="chatify logo" />
               </div>
+
               <div className="project-card__right">
-                <h2 className="heading-2">
+                <h2 className="heading-2 chatify-anim">
                   Chatify
-                  <br /> ChatApp
-                </h2>
+                  <br /> <span className="project-card__tag">ChatApp</span>
+                </h2> 
+                
+                <div className="project-card__details">
+                  <p>
+                    Real-time chat built with Socket.io, Express and Node. Fast,
+                    secure rooms with presence and typing indicators.
+                  </p>
+                  <ul>
+                    <li>One-to-one and group conversations</li>
+                    <li>Online status and message delivery</li>
+                    <li>Responsive UI with smooth animations</li>
+                  </ul>
+                </div>
                 <a
                   rel="noopener"
                   target="_blank"
@@ -410,6 +487,18 @@ const index: React.FC<indexProps> = () => {
                 >
                   Safarika
                 </h2>
+
+                <div className="project-card__details">
+                  <p>
+                    Travel landing page showcasing destinations with delightful
+                    motion and hover transitions.
+                  </p>
+                  <ul>
+                    <li>Framer Motion animations</li>
+                    <li>Responsive React components</li>
+                    <li>Optimized asset loading</li>
+                  </ul>
+                </div>
                 <a
                   rel="noopener"
                   target="_blank"
@@ -454,8 +543,19 @@ const index: React.FC<indexProps> = () => {
                   className="heading-2"
                 >
                   Paper-Trail
-                  <br /> Notes App
+                  <br /> <span className="project-card__tag">Notes App</span>
                 </h2>
+                <div className="project-card__details">
+                  <p>
+                    Full-stack notes application with authentication and cloud
+                    persistence.
+                  </p>
+                  <ul>
+                    <li>JWT auth with protected routes</li>
+                    <li>MongoDB storage via Mongoose</li>
+                    <li>Search and tag management</li>
+                  </ul>
+                </div>
                 <a
                   href="https://paper-trail-zeta.vercel.app/"
                   rel="noopener"
@@ -500,8 +600,20 @@ const index: React.FC<indexProps> = () => {
                   className="heading-2"
                 >
                   Shoping-Mart
-                  <br /> E-Commerce App
+                  <br /> <span className="project-card__tag">E-Commerce App</span>
                 </h2>
+
+                <div className="project-card__details">
+                  <p>
+                    Modern e-commerce experience with cart, checkout and
+                    product management.
+                  </p>
+                  <ul>
+                    <li>Express API with MongoDB</li>
+                    <li>Tailwind-styled React frontend</li>
+                    <li>Secure user accounts and orders</li>
+                  </ul>
+                </div>
 
                 <a
                   rel="noopener"
@@ -542,12 +654,26 @@ const index: React.FC<indexProps> = () => {
 
             {/* tools list below the reviews */}
             <div className="tools">
-              {tools.map((tool) => (
-                <div key={tool.name} className="tools__item">
-                  <img src={tool.icon} alt={tool.name} />
-                  <span className="tools__tooltip">{tool.name}</span>
-                </div>
-              ))}
+              {tools.map((tool) => {
+                const needsInvert = [
+                  "Git & GitHub",
+                  "Tailwind CSS",
+                  "Express.js",
+                  "WebSockets",
+                  "Vercel"
+                ].includes(tool.name);
+                
+                return (
+                  <div key={tool.name} className="tools__item">
+                    <img 
+                      src={tool.icon} 
+                      alt={tool.name}
+                      className={needsInvert ? "white-icon" : ""}
+                    />
+                    <span className="tools__tooltip">{tool.name}</span>
+                  </div>
+                );
+              })}
             </div>
           </section>
 
@@ -640,7 +766,7 @@ const index: React.FC<indexProps> = () => {
                       color: "rgba(255, 255, 255, 0.8)",
                     }}
                   >
-                    Kuchaman College • Years 2021-2024
+                    Kuchaman College •  2021-2024
                   </p>
 
                   <p
@@ -723,7 +849,7 @@ const index: React.FC<indexProps> = () => {
                       color: "rgba(255, 255, 255, 0.8)",
                     }}
                   >
-                    JECRC University • Years 2024-2026
+                    JECRC University • 2024-2026
                   </p>
 
                   <p
@@ -743,9 +869,10 @@ const index: React.FC<indexProps> = () => {
 
           <section className="section-socials">
             <h1 className="heading-1">
-              <span>Dont be a stranger!</span> <small>👋</small>
+              <span>Don`t be a stranger!</span> <small>👋</small>
             </h1>
             <p className="paragraph">Connect with me online</p>
+
             <div className="section-socials--links">
               <a
                 href="https://github.com/Alok-Vaishnav"
@@ -754,13 +881,23 @@ const index: React.FC<indexProps> = () => {
               >
                 👾 GitHub 🛠️
               </a>
+
               <a
                 href="https://leetcode.com/u/AlokVaishnav/"
                 rel="noopener"
                 target="_blank"
               >
-                🐦 Twitter
+                🐦 Leet-Code
               </a>
+
+              <a
+                href="mailto:alok.vsnv@gmail.com "
+                rel="noopener"
+                target="_blank"
+              >
+                ✉️ Email
+              </a>
+
               <a
                 href="https://www.linkedin.com/in/alok-vaishnav-63a9a4290"
                 rel="noopener"
@@ -768,6 +905,7 @@ const index: React.FC<indexProps> = () => {
               >
                 💼 LinkedIn
               </a>
+
               <a
                 href="https://www.instagram.com/aalok_vsnv/"
                 rel="noopener"
@@ -775,6 +913,7 @@ const index: React.FC<indexProps> = () => {
               >
                 📸 Instagram
               </a>
+
             </div>
           </section>
         </main>
@@ -794,4 +933,4 @@ const index: React.FC<indexProps> = () => {
   );
 };
 
-export default index;
+export default Index;

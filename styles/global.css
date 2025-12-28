@@ -387,18 +387,23 @@
 }
 .header__hero--heading {
   font-family: "Mark Pro", sans-serif;
-  font-size: 8rem;
+  font-size: 7.4rem;
   line-height: 100%;
   letter-spacing: -0.03em;
   color: var(--color-white);
   position: relative;
 }
+.header__hero--heading > div {
+  white-space: nowrap;
+}
+@media only screen and (max-width: 62.5em) {
+  .header__hero--heading > div {
+    white-space: normal;
+  }
+}
 @media only screen and (max-width: 45em) {
   .header__hero--heading {
     font-size: 7rem;
-  }
-  .header__hero--heading br {
-    display: none;
   }
 }
 @media only screen and (max-width: 28em) {

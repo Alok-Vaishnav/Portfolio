@@ -208,3 +208,10 @@
   letter-spacing: 0.19em;
   font-weight: 100;
 }
+
+// Hide entire navigation on mobile (≤769px)
+@media only screen and (max-width: 48.0625em) {
+  .navigation-wrapper {
+    display: none;
+  }
+}

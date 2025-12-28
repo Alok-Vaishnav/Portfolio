@@ -14,6 +14,8 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-image: url("../../public/webp/hand-left.webp");
+    background-color: rgba(0, 0, 0, 0);
+    opacity: 1;
 
     @media only screen and (max-width: 75em) {
       width: 22rem;
@@ -53,6 +55,7 @@
     @media only screen and (max-width: 20em) {
       width: 8rem;
       height: 8rem;
+      display: none;
     }
   }
 
@@ -67,7 +70,9 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-image: url("../../public/webp/hand-right.webp");
+    background-color: rgba(0, 0, 0, 0);
     z-index: -1;
+    opacity: 1;
 
     @media only screen and (max-width: 75em) {
       width: 22rem;
@@ -115,6 +120,7 @@
       width: 8rem;
       height: 16rem;
       bottom: 0.5rem;
+      display: none;
     }
   }
 }
@@ -166,6 +172,28 @@
   }
 
   &__hero {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    align-items: start;
+    gap: 6rem;
+
+    @media only screen and (max-width: 62.5em) {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 4rem;
+    }
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      gap: 2.4rem;
+      margin-top: -1rem;
+
+      @media only screen and (max-width: 62.5em) {
+        margin-top: 0;
+      }
+    }
+
     &--heading {
       font-family: $font-secondary;
       font-size: 8rem;
@@ -184,10 +212,11 @@
 
       @media only screen and (max-width: 56.25em) {
         font-size: 6.5rem;
+        text-align: center;
+        
         br {
           display: none;
         }
-        text-align: center;
       }
 
       @media only screen and (max-width: 48em) {
@@ -226,8 +255,105 @@
       }
     }
 
+    &--subheading {
+      font-size: 2rem;
+      line-height: 1.5;
+      color: var(--color-gray);
+      max-width: 56ch;
+
+      @media only screen and (max-width: 62.5em) {
+        max-width: none;
+      }
+    }
+
+    &__photo {
+      justify-self: end;
+      width: clamp(20rem, 28vw, 32rem);
+      height: auto;
+      transform: translateX(35%) translateY(-15%);
+      transition: all 0.4s ease;
+      position: relative;
+
+      @media only screen and (max-width: 62.5em) {
+        justify-self: center;
+        transform: none;
+      }
+
+      &:hover {
+        transform: translateX(35%) translateY(-18%);
+
+        @media only screen and (max-width: 62.5em) {
+          transform: translateY(-5px);
+        }
+
+        img {
+          filter: brightness(1.08) contrast(1.15) saturate(1.1);
+        }
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        display: block;
+        
+        // Cinematic lighting & professional color grading
+        filter: 
+          brightness(1.05)                    // Slightly brighter for premium look
+          contrast(1.12)                      // Enhance contrast
+          saturate(1.08)                      // Boost saturation subtly
+          hue-rotate(-5deg)                   // Cool tone (slightly blue)
+          drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));  // Soft shadow for depth
+        
+        // Blend mode to hide white background
+        mix-blend-mode: screen;               // Makes white areas transparent/disappear
+        
+        transition: all 0.4s ease;
+
+        &.profile-image {
+          position: relative;
+          border: none;
+          border-radius: 1.2rem;
+          background: transparent;
+          padding: 0;
+          box-shadow:
+            0 18px 40px rgba(0, 0, 0, 0.35),
+            0 0 0 1px rgba(255, 255, 255, 0.06);
+          overflow: hidden;
+          transition: all 0.35s ease;
+          
+          &:hover {
+            transform: translateY(-4px);
+            box-shadow: 
+              0 22px 55px rgba(0, 0, 0, 0.4),
+              0 0 0 1px rgba(255, 255, 255, 0.08);
+          }
+          
+          @media only screen and (max-width: 25em) {
+            padding: 0;
+          }
+        }
+      }
+
+      // Cinematic vignette overlay (subtle darkening at edges)
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse at center,
+          transparent 0%,
+          rgba(0, 0, 0, 0.08) 70%,
+          rgba(0, 0, 0, 0.15) 100%
+        );
+        pointer-events: none;
+        border-radius: 0;
+        z-index: 1;
+      }
+    }
+
     &--cta {
-      margin-top: 13rem;
+      margin-top: 4rem;
       display: inline-block;
       font-family: $font-tertiary;
       font-size: 1.8rem;
@@ -236,32 +362,7 @@
       color: var(--color-gray);
       text-decoration: none;
       position: relative;
-
-      @media only screen and (max-width: 56.25em) {
-        margin-top: 10rem;
-        text-align: center;
-        display: block;
-      }
-
-      @media only screen and (max-width: 37.5em) {
-        font-size: 1.6rem;
-        margin-top: 8rem;
-      }
-
-      @media only screen and (max-width: 31.25em) {
-        font-size: 1.4rem;
-        margin-top: 6rem;
-      }
-
-      @media only screen and (max-width: 25em) {
-        font-size: 1.2rem;
-        margin-top: 4rem;
-      }
-
-      @media only screen and (max-width: 20em) {
-        font-size: 1rem;
-        margin-top: 3rem;
-      }
+      transition: all 0.3s ease;
 
       &::after {
         display: block;
@@ -271,8 +372,34 @@
         left: 0;
         width: 50%;
         height: 1px;
-        background: var(--color-gray);
+        background: linear-gradient(90deg, var(--color-light-blue) 0%, var(--color-light-purple) 100%);
         transition: all 0.3s ease;
+      }
+
+      @media only screen and (max-width: 56.25em) {
+        margin-top: 3rem;
+        text-align: center;
+        display: block;
+      }
+
+      @media only screen and (max-width: 37.5em) {
+        font-size: 1.6rem;
+        margin-top: 2.5rem;
+      }
+
+      @media only screen and (max-width: 31.25em) {
+        font-size: 1.4rem;
+        margin-top: 2rem;
+      }
+
+      @media only screen and (max-width: 25em) {
+        font-size: 1.2rem;
+        margin-top: 2rem;
+      }
+
+      @media only screen and (max-width: 20em) {
+        font-size: 1rem;
+        margin-top: 1.5rem;
       }
 
       &:hover {
@@ -570,6 +697,9 @@
       a {
         color: #6b9796;
       }
+      h2 .project-card__tag {
+        color: #22d3ee;
+      }
       &::before {
         background-image: url("../../public/svg/01.svg");
       }
@@ -723,6 +853,7 @@
     }
     &__right {
       margin-left: 6rem;
+      flex: 1; // allow the text section to grow
 
       @media only screen and (max-width: 56.25em) {
         margin-left: 0rem;
@@ -736,6 +867,7 @@
 
       h2 {
         margin-bottom: 6rem;
+        transition: transform 0.35s ease, text-shadow 0.35s ease;
 
         @media only screen and (max-width: 56.25em) {
           margin-bottom: 4rem;
@@ -746,7 +878,79 @@
         }
 
         @media only screen and (max-width: 31.25em) {
+
+      .project-card__link {
+        display: inline-block;
+        font-family: $font-tertiary;
+        font-size: 1.8rem;
+        line-height: 92.4%;
+        letter-spacing: 0.19em;
+        text-decoration: none;
+        position: relative;
+        color: var(--color-white);
+        padding: 0.35rem 0.15rem;
+        text-shadow: 0 6px 24px rgba(104, 213, 249, 0.35);
+        transition: all 0.35s ease;
+
+        &::after {
+          display: block;
+          content: "";
+          position: absolute;
+          bottom: -1rem;
+          left: 0;
+          width: 55%;
+          height: 2px;
+          background: linear-gradient(90deg, #09c6f9 0%, #9333ea 100%);
+          transition: all 0.35s ease;
+        }
+
+        &:hover {
+          text-shadow: 0 10px 30px rgba(147, 51, 234, 0.45);
+          transform: translateY(-2px);
+
+          &::after {
+            width: 100%;
+          }
+        }
+      }
           margin-bottom: 2rem;
+        }
+
+        .project-card__tag {
+          display: inline-block;
+          font-size: 2rem;
+          font-weight: 300;
+          color: #213638; // darker accent to suit website theme
+          letter-spacing: 0.02em;
+
+          @media only screen and (max-width: 56.25em) {
+            font-size: 1.8rem;
+          }
+          @media only screen and (max-width: 37.5em) {
+            font-size: 1.6rem;
+          }
+          @media only screen and (max-width: 31.25em) {
+            font-size: 1.5rem;
+          }
+        }
+      }
+      .project-card__details {
+        margin-bottom: 4rem;
+        max-width: 52rem;
+        color: var(--color-gray);
+        font-size: 1.4rem;
+        line-height: 160%;
+
+        p {
+          margin-bottom: 1.2rem;
+          color: rgba(255, 255, 255, 0.8);
+        }
+
+        ul {
+          padding-left: 1.6rem;
+          list-style: disc;
+          display: grid;
+          gap: 0.6rem;
         }
       }
     }
@@ -797,6 +1001,13 @@
       @media only screen and (max-width: 31.25em) {
         width: 4rem;
         margin-top: 3rem;
+      }
+    }
+
+    &:hover {
+      .project-card__right h2 {
+        transform: translateY(-6px);
+        text-shadow: 0 12px 32px rgba(147, 51, 234, 0.35), 0 6px 18px rgba(9, 198, 249, 0.35);
       }
     }
   }
@@ -1147,6 +1358,31 @@
   }
 }
 
+// Education cards: animated accent + shimmer
+.education__item {
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.45s ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.05) 35%, rgba(255, 255, 255, 0.12) 50%, rgba(255, 255, 255, 0.05) 65%, transparent 100%);
+    transform: translateX(-140%);
+    transition: transform 0.8s ease;
+    pointer-events: none;
+  }
+
+  &:hover {
+    box-shadow: 0 16px 42px rgba(0, 0, 0, 0.25);
+
+    &::after {
+      transform: translateX(140%);
+    }
+  }
+}
+
 .review-card__anim1 {
   animation: reviewCardAnim1 25s ease-in-out infinite alternate;
 
@@ -1339,31 +1575,34 @@
   &--links {
     @include centerContent;
     margin-top: 4rem;
-    gap: 2rem;
+    gap: 3.5rem;
     flex-wrap: wrap;
     max-width: 40rem;
+    justify-content: flex-start; // ensure left-to-right flow for wrapping rows
 
     @media only screen and (max-width: 37.5em) {
-      gap: 1.5rem;
+      gap: 2rem;
       margin-top: 3rem;
     }
 
     @media only screen and (max-width: 31.25em) {
-      gap: 1rem;
+      gap: 1.2rem;
       margin-top: 2rem;
     }
 
     @media only screen and (max-width: 25em) {
-      gap: 0.75rem;
+      gap: 1rem;
     }
 
     @media only screen and (max-width: 20em) {
-      gap: 0.5rem;
+      gap: 0.75rem;
     }
   }
 
   a {
     @include centerContent;
+    justify-content: flex-start; // prevent emoji and label from spacing apart
+    gap: 1rem; // space between emoji and label
     color: var(--color-gray);
     text-decoration: none;
     font-family: $font-tertiary;
