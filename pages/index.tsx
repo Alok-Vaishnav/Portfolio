@@ -499,7 +499,7 @@ const Index: React.FC<indexProps> = () => {
                 <a
                   rel="noopener"
                   target="_blank"
-                  href="https://safarika-adeola.netlify.app/"
+                  href=""
                   className="project-card__link"
                 >
                   Take a Look
@@ -508,7 +508,7 @@ const Index: React.FC<indexProps> = () => {
                   <a
                     rel="noopener"
                     target="_blank"
-                    href="https://github.com/adeolaadeoti/safarika"
+                    href=""
                   >
                     <img src="svg/github.svg" alt="github icon" />
                   </a>
