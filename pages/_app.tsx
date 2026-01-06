@@ -66,10 +66,6 @@ function MyApp({ Component, pageProps }: any) {
 
   return (
     <div>
-      {/* <Head>
-        <link rel="icon" href="public\Fav\favicon.ico" />
-        <link rel="apple-touch-icon" href="public\Fav\apple-touch-icon.png" />
-      </Head> */}
       <AnimatePresence mode="wait" onExitComplete={handleExitComplete}>
         <Component {...pageProps} key={router.route} />
         <Analytics />

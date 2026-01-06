@@ -50,39 +50,39 @@ export const MobileNavigation = ({ variants, isOpen }: any) => (
           <h4 className="navigation-h4">DONT BE A STRANGER</h4>
           <div className="navigation-top__left--links">
             <a
-              href="https://github.com/adeolaadeoti"
+              href="https://github.com/Alok-Vaishnav"
               rel="noopener"
               target="_blank"
             >
               👾 GH
             </a>
             <a
-              href="https://twitter.com/adeolajs"
-              rel="noopener"
-              target="_blank"
-            >
-              🐦 TW
-            </a>
-            <a
-              href="https://www.linkedin.com/in/adeoladev"
+              href="https://www.linkedin.com/in/alok-vaishnav-63a9a4290"
               rel="noopener"
               target="_blank"
             >
               💼 LD
             </a>
             <a
-              href="https://www.instagram.com/adeolaadeoti_"
+              href="https://www.instagram.com/aalok_vsnv/"
               rel="noopener"
               target="_blank"
             >
               📸 IN
+            </a>
+            <a
+              href="https://leetcode.com/u/AlokVaishnav/"
+              rel="noopener"
+              target="_blank"
+            >
+              💻 LC
             </a>
           </div>
         </div>
         <div className="navigation-top__right">
           <h4 className="navigation-h4">HAVE AN IDEA?</h4>
           <a
-            href="mailto:adeolaonigegeara@gmail.com"
+            href="mailto:alok.vsnv@gmail.com"
             target="_blank"
             rel="nofollow noopener noreferrer"
           >
@@ -104,37 +104,29 @@ export const MobileNavigation = ({ variants, isOpen }: any) => (
           <a
             target="_blank"
             rel="noopener"
-            href="https://alexxandria.vercel.app/"
+            href="https://chatify-orpin.vercel.app/"
             className="navigation-bottom__projects-card"
           >
-            <img src="webp/safarika-nav.webp" alt="alexxandria" />
-            <h2>
-              Alexxandria
-              <br />
-              Forque
-            </h2>
+            <img src="/webp/Chatify-1.png" alt="chatify" />
+            <h2>Chatify</h2>
           </a>
           <a
-            href="https://safarika-adeola.netlify.app/"
+            href="https://track-mint-beryl.vercel.app/"
             target="_blank"
             rel="noopener"
             className="navigation-bottom__projects-card"
           >
-            <img src="webp/safarika-nav.webp" alt="safarika" />
-            <h2>Safarika</h2>
+            <img src="webp/track-mint01.png" alt="track-mint" />
+            <h2>Track-Mint</h2>
           </a>
           <a
-            href="https://adeolaadeoti.netlify.app/"
+            href="https://paper-trail-zeta.vercel.app/"
             target="_blank"
             rel="noopener"
             className="navigation-bottom__projects-card"
           >
-            <img src="webp/Profile.png" alt="adeola" />
-            <h2>
-              AdeolaAdeoti
-              <br />
-              Version 1
-            </h2>
+            <img src="webp/Paper-Trail-1.png" alt="paper-trail" />
+            <h2>Paper-Trail</h2>
           </a>
         </div>
       </motion.div>

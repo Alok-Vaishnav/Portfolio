@@ -362,7 +362,7 @@ const Index: React.FC<indexProps> = () => {
 
                 <a
                   className="header__hero--cta"
-                  href="https://drive.google.com/file/d/1-Kyl0sg2u7H18g3sRIX3GpK9MAsNyhRy/view?usp=sharing"
+                  href="https://drive.google.com/file/d/1DBlD2Xva7hFaQBREDugKMr-BSANDI3AU/view?usp=drive_link"
                   rel="noopener"
                   target="_blank"
                 >
@@ -465,53 +465,61 @@ const Index: React.FC<indexProps> = () => {
             {/* 02 */}
             <div className="project-card">
               <div className="project-card__left">
-                <h4 className="heading-4">REACT JS, FRAMER MOTION</h4>
+
+
+                <h4 className="heading-4">Next.js, Node.js, MongoDB, Tailwind CSS</h4>
+
               </div>
+
               <div
                 className="project-card__middle"
                 data-displacement="webp/myDistorsionImage.webp"
               >
-                <img src="webp/safarika-1.webp" alt="safarika" />
-                <img src="webp/safarika-2.webp" alt="safarika logo" />
+                <img src="webp/track-mint01.png" alt="track-mint" />
+                <img src="webp/track-mint02.png" alt="track-mint logo" />
+
               </div>
+
               <div className="project-card__right">
                 <h2
                   data-scroll
                   data-scroll-offset="35%"
                   data-scroll-repeat={true}
-                  data-scroll-class="safarika-anim"
+                  data-scroll-class="track-mint-anim"
                   className="heading-2"
                 >
-                  Safarika
+                  Track-Mint
                 </h2>
 
                 <div className="project-card__details">
                   <p>
-                    Travel landing page showcasing destinations with delightful
-                    motion and hover transitions.
+                    Smart expense tracking app with real-time financial insights
+                    and intuitive budget management.
                   </p>
                   <ul>
-                    <li>Framer Motion animations</li>
-                    <li>Responsive React components</li>
-                    <li>Optimized asset loading</li>
+                    <li>Track income and expenses seamlessly</li>
+                    <li>Real-time budget analytics and reports</li>
+                    <li>MongoDB backend with Next.js frontend</li>
                   </ul>
                 </div>
                 <a
                   rel="noopener"
                   target="_blank"
-                  href=""
+                  href="https://track-mint-beryl.vercel.app/"
                   className="project-card__link"
                 >
                   Take a Look
                 </a>
+
                 <div className="project-card__socials">
                   <a
                     rel="noopener"
                     target="_blank"
-                    href=""
+                    href="https://github.com/Alok-Vaishnav/TrackMint"
                   >
                     <img src="svg/github.svg" alt="github icon" />
                   </a>
+                  
                 </div>
               </div>
             </div>
