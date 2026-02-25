@@ -199,6 +199,22 @@ const Index: React.FC<indexProps> = () => {
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
     },
     {
+      name: "PostgreSQL",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
+    },
+    {
+      name: "AWS EC2",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+    },
+    {
+      name: "AWS S3",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg",
+    },
+    {
+      name: "GitHub Actions",
+      icon: "https://cdn.simpleicons.org/githubactions/2088FF",
+    },
+    {
       name: "WebSockets",
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg",
     },
@@ -208,7 +224,23 @@ const Index: React.FC<indexProps> = () => {
     },
     {
       name: "REST APIs",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg",
+      icon: "https://cdn.simpleicons.org/openapiinitiative/6BA539",
+    },
+    {
+      name: "JWT",
+      icon: "https://cdn.simpleicons.org/jsonwebtokens/D63AFF",
+    },
+    {
+      name: "Microservices",
+      icon: "https://cdn.simpleicons.org/rabbitmq/FF6600",
+    },
+    {
+      name: "MVC Architecture",
+      icon: "https://cdn.simpleicons.org/spring/6DB33F",
+    },
+    {
+      name: "CI/CD Pipelines",
+      icon: "https://cdn.simpleicons.org/gitlab/FC6D26",
     },
     {
       name: "Redis",
@@ -235,20 +267,12 @@ const Index: React.FC<indexProps> = () => {
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg",
     },
     {
-      name: "Figma",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
-    },
-    {
       name: "Vercel",
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg",
     },
     {
       name: "Netlify",
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg",
-    },
-    {
-      name: "Canva",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg",
     },
   ];
 
