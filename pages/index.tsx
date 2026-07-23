@@ -274,6 +274,30 @@ const Index: React.FC<indexProps> = () => {
       name: "Netlify",
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg",
     },
+    {
+      name: "Python",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+    },
+    {
+      name: "NumPy",
+      icon: "https://cdn.simpleicons.org/numpy/013243",
+    },
+    {
+      name: "Pandas",
+      icon: "https://cdn.simpleicons.org/pandas/150458",
+    },
+    {
+      name: "Matplotlib",
+      icon: "https://matplotlib.org/stable/_static/logo2.svg",
+    },
+    {
+      name: "Scikit-learn",
+      icon: "https://cdn.simpleicons.org/scikitlearn/F7931E",
+    },
+    {
+      name: "OpenAI API",
+      icon: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/openai.svg",
+    },
   ];
 
   return (
@@ -386,7 +410,7 @@ const Index: React.FC<indexProps> = () => {
 
                 <a
                   className="header__hero--cta"
-                  href="https://drive.google.com/file/d/1DBlD2Xva7hFaQBREDugKMr-BSANDI3AU/view?usp=drive_link"
+                  href="https://drive.google.com/file/d/1LVo8HvgRVrkeVYnlSmZwCr4kLf3L_vIB/view?usp=sharing"
                   rel="noopener"
                   target="_blank"
                 >
@@ -689,7 +713,9 @@ const Index: React.FC<indexProps> = () => {
                   "Tailwind CSS",
                   "Express.js",
                   "WebSockets",
-                  "Vercel"
+                  "Vercel",
+                  "Matplotlib",
+                  "OpenAI API"
                 ].includes(tool.name);
                 
                 return (
@@ -963,3 +989,4 @@ const Index: React.FC<indexProps> = () => {
 };
 
 export default Index;
+
