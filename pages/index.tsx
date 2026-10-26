@@ -204,11 +204,11 @@ const Index: React.FC<indexProps> = () => {
     },
     {
       name: "AWS EC2",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original.svg",
     },
     {
       name: "AWS S3",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain.svg",
     },
     {
       name: "GitHub Actions",
@@ -277,6 +277,22 @@ const Index: React.FC<indexProps> = () => {
     {
       name: "Python",
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+    },
+    {
+      name: "FastAPI",
+      icon: "https://cdn.simpleicons.org/fastapi/009688",
+    },
+    {
+      name: "Neon",
+      icon: "https://cdn.simpleicons.org/neon/00E599",
+    },
+    {
+      name: "Google API",
+      icon: "https://cdn.simpleicons.org/google/4285F4",
+    },
+    {
+      name: "Pinecone",
+      icon: "/svg/pinecone.svg",
     },
     {
       name: "NumPy",
@@ -989,4 +1005,3 @@ const Index: React.FC<indexProps> = () => {
 };
 
 export default Index;
-
